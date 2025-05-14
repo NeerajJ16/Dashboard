@@ -9,7 +9,7 @@ export default function SignIn() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
-
+console.log("API_BASE_URL:", API_BASE_URL);
     try {
       const formData = new URLSearchParams()
       formData.append("username", email)
