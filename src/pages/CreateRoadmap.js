@@ -2,6 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import { API_BASE_URL } from "../lib/config";
 const buttonStyle = {
     backgroundColor: "#18cb96",
     color: "#ffffff",
@@ -26,7 +27,7 @@ export default function CreateRoadmap() {
         }
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch("http://44.201.125.113:8000/api/generate_roadmap_stream", {
+            const res = await fetch(`${API_BASE_URL}/api/generate_roadmap_stream`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

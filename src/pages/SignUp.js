@@ -1,6 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { API_BASE_URL } from "../lib/config";
 export default function SignUp() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ export default function SignUp() {
         e.preventDefault();
         setError("");
         try {
-            const res = await fetch("http://44.201.125.113:8000/api/auth/register", {
+            const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password }),

@@ -1,6 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../lib/config";
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,7 +14,7 @@ export default function SignIn() {
             formData.append("username", email);
             formData.append("password", password);
             formData.append("grant_type", "password");
-            const res = await fetch("http://44.201.125.113:8000/api/auth/login", {
+            const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: formData,

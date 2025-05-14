@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Sidebar from "../components/Sidebar"
-
+import { API_BASE_URL } from "../lib/config";
 interface ResourceItem {
   topic: string
   resource: string
@@ -50,7 +50,7 @@ export default function RoadmapDetail() {
     const fetchRoadmap = async () => {
       try {
         const token = localStorage.getItem("token")
-        const res = await fetch(`http://44.201.125.113:8000/api/user/roadmaps/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/user/roadmaps/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
