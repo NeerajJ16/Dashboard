@@ -56,6 +56,7 @@ export default function RoadmapDetail() {
           },
         })
         const data = await res.json()
+         console.log("📦 Raw API response:", data)
         setRoadmap(data)
       } catch (err) {
         console.error("Failed to load roadmap:", err)
@@ -74,7 +75,6 @@ export default function RoadmapDetail() {
   if (!roadmap) {
     return <div className="text-white p-6 md:ml-72">Roadmap not found.</div>
   }
-
   return (
     <div className="flex">
       <Sidebar />
@@ -108,8 +108,9 @@ export default function RoadmapDetail() {
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {items.map((item, idx) => {
-                      const parts = item.resource.split(" - ")
-                      const url = parts[1] || "#"
+                      const urlMatches = item.resource.match(/https?:\/\/[^\s]+/g)
+                      const url = urlMatches && urlMatches.length > 0 ? urlMatches[urlMatches.length - 1] : "#"
+                      const title = item.resource.replace(url, "").replace(/[-–]\s*$/, "").trim()
 
                       return (
                         <div
@@ -121,13 +122,14 @@ export default function RoadmapDetail() {
                           </h4>
                           <div className="flex justify-between items-center">
                             <a
-                              href={url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-sm text-[#18cb96] underline hover:brightness-110"
-                            >
-                              Start Learning →
-                            </a>
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-[#18cb96] underline hover:brightness-110"
+        >
+          {title || "Start Learning"} →
+        </a>
+
                             <span className="text-xs bg-gray-700 text-white px-2 py-1 rounded">
                               {item.hours} hrs
                             </span>
