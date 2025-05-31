@@ -1,6 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../lib/config";
 const buttonStyle = {
     backgroundColor: "#18cb96",
     color: "#ffffff",
@@ -13,7 +14,7 @@ export default function Sidebar() {
         const fetchRoadmaps = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch("http://44.201.125.113:8000/api/user/roadmaps", {
+                 const res = await fetch(`${API_BASE_URL}/api/user/roadmaps`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const data = await res.json();
