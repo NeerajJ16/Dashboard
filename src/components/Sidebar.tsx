@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-
+import { API_BASE_URL } from "../lib/config";
 interface Roadmap {
   id: string
   learning_goals: string
@@ -20,7 +20,7 @@ export default function Sidebar() {
     const fetchRoadmaps = async () => {
       try {
         const token = localStorage.getItem("token")
-        const res = await fetch("http://44.201.125.113:8000/api/user/roadmaps", {
+        const res = await fetch(`${API_BASE_URL}/api/user/roadmaps`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         const data = await res.json()
